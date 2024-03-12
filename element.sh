@@ -12,7 +12,6 @@ fi
 retrieve_element_info() {
     # Check if the argument is a number
     if [[ $1 =~ ^[0-9]+$ ]]; then
-        #element_info=$($PSQL "SELECT * FROM properties WHERE atomic_number = $1;")
         element_info=$($PSQL "SELECT properties.*, elements.name, elements.symbol, types.type FROM properties JOIN elements  ON properties.atomic_number = elements.atomic_number JOIN types ON properties.type_id = types.type_id WHERE properties.atomic_number = $1;")
         
     else
